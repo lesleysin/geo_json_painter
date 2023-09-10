@@ -1,4 +1,5 @@
 import 'geo_json_feature_type.dart';
+import 'geo_json_geometry_fabric.dart';
 import 'geo_json_object.dart';
 import 'geo_json_geometry_object.dart';
 
