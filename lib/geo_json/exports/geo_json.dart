@@ -1,6 +1,4 @@
-import 'package:geo_json_painter/geo_json/geo_json_feature_collection.dart';
-
-import 'geo_json_feature.dart';
+import 'package:geo_json_painter/geo_json/feature/index.dart';
 
 class GeoJson {
   GeoJsonFeatureCollection? _collection;

@@ -1,13 +1,12 @@
 import 'dart:ui';
-import 'package:geo_json_painter/geo_json/default_paint.dart';
 
-import 'geo_json_coordinate_pair_list.dart';
-import 'geo_json_geometry_object.dart';
+import 'package:geo_json_painter/geo_json/constants/default_paint.dart';
+import 'package:geo_json_painter/geo_json/models/index.dart';
 
-class GeoJsonMultiPoint extends GeoJsonGeometryObject {
+class GeoJsonLineStrings extends GeoJsonGeometryObject {
   final GeoJsonCoordinatePairList coordinates;
 
-  GeoJsonMultiPoint({
+  GeoJsonLineStrings({
     required super.type,
     required this.coordinates,
   });
@@ -21,7 +20,7 @@ class GeoJsonMultiPoint extends GeoJsonGeometryObject {
       );
     }
     canvas.drawPoints(
-      PointMode.points,
+      PointMode.polygon,
       points,
       paint ?? defaultPaint,
     );

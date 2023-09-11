@@ -1,16 +1,15 @@
-import 'geo_json_feature_type.dart';
-import 'geo_json_geometry_fabric.dart';
-import 'geo_json_object.dart';
-import 'geo_json_geometry_object.dart';
+import 'package:geo_json_painter/geo_json/geometries/index.dart';
+import 'package:geo_json_painter/geo_json/models/index.dart';
 
-class GeoJsonFeature<T extends Object> extends GeoJsonObject {
+class GeoJsonFeature extends GeoJsonObject {
   final GeoJsonGeometryObject geometry;
-  final T properties;
+  final Map<String, dynamic> properties;
 
   GeoJsonFeature({
     required super.type,
     required this.geometry,
     required this.properties,
+    super.id,
   });
 
   factory GeoJsonFeature.fromJson(Map<String, dynamic> json) {

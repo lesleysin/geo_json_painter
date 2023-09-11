@@ -1,13 +1,11 @@
-import 'package:geo_json_painter/geo_json/geo_json_line_string.dart';
+import 'package:geo_json_painter/geo_json/models/index.dart';
 
-import 'geo_json_feature_type.dart';
-import 'geo_json_geometry_object.dart';
-import 'geo_json_multi_point.dart';
-import 'geo_json_point.dart';
+import 'index.dart';
 
 class GeometryFabric {
   static GeoJsonGeometryObject createFeature(Map<String, dynamic> json) {
     final featureType = geoJsonFeatureTypeFromString(json["type"]);
+
     switch (featureType) {
       case GeoJsonFeatureType.Point:
         {
@@ -26,6 +24,27 @@ class GeometryFabric {
       case GeoJsonFeatureType.LineString:
         {
           return GeoJsonLineStrings(
+            type: featureType,
+            coordinates: List.from(json["coordinates"]),
+          );
+        }
+      case GeoJsonFeatureType.MultiLineString:
+        {
+          return GeoJsonMultiLineString(
+            type: featureType,
+            coordinates: List.from(json["coordinates"]),
+          );
+        }
+      case GeoJsonFeatureType.Polygon:
+        {
+          return GeoJsonPolygon(
+            type: featureType,
+            coordinates: List.from(json["coordinates"]),
+          );
+        }
+      case GeoJsonFeatureType.MultiPolygon:
+        {
+          return GeoJsonMultiPolygon(
             type: featureType,
             coordinates: List.from(json["coordinates"]),
           );

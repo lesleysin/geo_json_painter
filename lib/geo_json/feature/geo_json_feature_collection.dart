@@ -1,6 +1,6 @@
-import 'geo_json_feature.dart';
-import 'geo_json_feature_type.dart';
-import 'geo_json_object.dart';
+import 'package:geo_json_painter/geo_json/models/index.dart';
+
+import 'index.dart';
 
 class GeoJsonFeatureCollection extends GeoJsonObject {
   final List<GeoJsonFeature> features;

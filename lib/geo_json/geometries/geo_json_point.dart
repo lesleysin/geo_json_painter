@@ -1,8 +1,7 @@
 import 'dart:ui';
-import 'package:geo_json_painter/geo_json/default_paint.dart';
 
-import 'geo_json_geometry_object.dart';
-import 'geo_json_coordinate_pair.dart';
+import 'package:geo_json_painter/geo_json/constants/default_paint.dart';
+import 'package:geo_json_painter/geo_json/models/index.dart';
 
 class GeoJsonPoint extends GeoJsonGeometryObject {
   final GeoJsonCoordinatePair coordinates;
