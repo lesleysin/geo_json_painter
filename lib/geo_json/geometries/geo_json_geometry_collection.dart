@@ -11,7 +11,10 @@ class GeoJsonGeometryCollection extends GeoJsonGeometryObject {
   });
 
   @override
-  void drawOnCanvas(Canvas canvas, Paint? paint) {
+  void drawOnCanvas(
+    Canvas canvas,
+    Paint? paint,
+  ) {
     throw UnsupportedError("Collection could not be rendered");
   }
 }

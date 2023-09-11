@@ -12,7 +12,10 @@ class GeoJsonMultiPoint extends GeoJsonGeometryObject {
   });
 
   @override
-  void drawOnCanvas(Canvas canvas, Paint? paint) {
+  void drawOnCanvas(
+    Canvas canvas,
+    Paint? paint,
+  ) {
     final List<Offset> points = [];
     for (var pair in coordinates) {
       points.add(

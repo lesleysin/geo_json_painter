@@ -12,7 +12,10 @@ class GeoJsonMultiLineString extends GeoJsonGeometryObject {
   });
 
   @override
-  void drawOnCanvas(Canvas canvas, Paint? paint) {
+  void drawOnCanvas(
+    Canvas canvas,
+    Paint? paint,
+  ) {
     for (var line in coordinates) {
       final List<Offset> points = [];
       for (var pair in line) {

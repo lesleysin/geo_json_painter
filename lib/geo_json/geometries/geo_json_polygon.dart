@@ -12,7 +12,10 @@ class GeoJsonPolygon extends GeoJsonGeometryObject {
   });
 
   @override
-  void drawOnCanvas(Canvas canvas, Paint? paint) {
+  void drawOnCanvas(
+    Canvas canvas,
+    Paint? paint,
+  ) {
     for (var polygon in coordinates) {
       final List<Offset> points = [];
       for (var pair in polygon) {

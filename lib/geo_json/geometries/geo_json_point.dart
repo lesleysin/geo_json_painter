@@ -12,7 +12,10 @@ class GeoJsonPoint extends GeoJsonGeometryObject {
   });
 
   @override
-  void drawOnCanvas(Canvas canvas, Paint? paint) {
+  void drawOnCanvas(
+    Canvas canvas,
+    Paint? paint,
+  ) {
     canvas.drawPoints(
       PointMode.points,
       [

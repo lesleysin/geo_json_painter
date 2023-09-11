@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_json_painter/geo_json/feature/geo_json_feature.dart';
 import 'package:geo_json_painter/geo_json/geometries/index.dart';
 import 'package:geo_json_painter/geo_json/models/index.dart';
 
@@ -6,23 +7,34 @@ import 'index.dart';
 
 class GeoJsonCustomPainter extends CustomPainter {
   final GeoJson geoJson;
-  final Map<GeoJsonFeatureType, Paint> paints;
 
   GeoJsonCustomPainter({
     required this.geoJson,
-    this.paints = const {},
   });
 
-  void _drawGeometry(GeoJsonGeometryObject geometryObject, Canvas canvas) {
-    geometryObject.drawOnCanvas(
-      canvas,
-      paints[geometryObject.type],
-    );
+  void _drawCollectionGeometry(GeoJsonGeometryObject geometry, Canvas canvas) {
+    geometry.drawOnCanvas(canvas, geoJson.painters[geometry.type]);
   }
 
-  void _drawCollection(GeoJsonGeometryCollection collection, Canvas canvas) {
+  void _drawFeature(
+    GeoJsonFeature feature,
+    Canvas canvas,
+  ) {
+    final builder = geoJson.builders[feature.geometry.type];
+    final paint = geoJson.painters[feature.geometry.type];
+    if (builder != null) {
+      builder(canvas, feature);
+    } else {
+      feature.geometry.drawOnCanvas(canvas, paint);
+    }
+  }
+
+  void _drawCollection(
+    GeoJsonGeometryCollection collection,
+    Canvas canvas,
+  ) {
     for (var geometry in collection.geometries) {
-      _drawGeometry(geometry, canvas);
+      _drawCollectionGeometry(geometry, canvas);
     }
   }
 
@@ -32,9 +44,14 @@ class GeoJsonCustomPainter extends CustomPainter {
       for (var feature in geoJson.collection!.features) {
         if (feature.geometry.type == GeoJsonFeatureType.GeometryCollection) {
           _drawCollection(
-              feature.geometry as GeoJsonGeometryCollection, canvas);
+            feature.geometry as GeoJsonGeometryCollection,
+            canvas,
+          );
         } else {
-          _drawGeometry(feature.geometry, canvas);
+          _drawFeature(
+            feature,
+            canvas,
+          );
         }
       }
     }
