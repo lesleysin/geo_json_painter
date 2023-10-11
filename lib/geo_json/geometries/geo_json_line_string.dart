@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:geo_json_painter/geo_json/constants/default_paint.dart';
 import 'package:geo_json_painter/geo_json/models/index.dart';
 
 class GeoJsonLineStrings extends GeoJsonGeometryObject {
@@ -9,12 +8,14 @@ class GeoJsonLineStrings extends GeoJsonGeometryObject {
   GeoJsonLineStrings({
     required super.type,
     required this.coordinates,
+    required super.paintProperties,
   });
 
   @override
   void drawOnCanvas(
     Canvas canvas,
     Paint? paint,
+    bool internalPaintOverridingEnabled,
   ) {
     final List<Offset> points = [];
     for (var pair in coordinates) {
@@ -25,7 +26,7 @@ class GeoJsonLineStrings extends GeoJsonGeometryObject {
     canvas.drawPoints(
       PointMode.polygon,
       points,
-      paint ?? defaultPaint,
+      mergePaints(paint, internalPaintOverridingEnabled),
     );
   }
 }

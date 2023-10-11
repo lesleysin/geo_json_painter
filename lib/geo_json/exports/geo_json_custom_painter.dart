@@ -8,12 +8,26 @@ import 'index.dart';
 class GeoJsonCustomPainter extends CustomPainter {
   final GeoJson geoJson;
 
+  ///Determines whether properties passed in the properties
+  ///object will be used during rendering and whether
+  ///these properties will override previously defined properties.
+  ///
+  ///This is possible when you have explicitly overridden
+  ///the paint function for the primitive or
+  ///explicitly defined a Paint object for the primitive
+  final bool internalPaintOverridingEnabled;
+
   GeoJsonCustomPainter({
     required this.geoJson,
+    this.internalPaintOverridingEnabled = true,
   });
 
   void _drawCollectionGeometry(GeoJsonGeometryObject geometry, Canvas canvas) {
-    geometry.drawOnCanvas(canvas, geoJson.painters[geometry.type]);
+    geometry.drawOnCanvas(
+      canvas,
+      geoJson.painters[geometry.type],
+      internalPaintOverridingEnabled,
+    );
   }
 
   void _drawFeature(
@@ -23,9 +37,16 @@ class GeoJsonCustomPainter extends CustomPainter {
     final builder = geoJson.builders[feature.geometry.type];
     final paint = geoJson.painters[feature.geometry.type];
     if (builder != null) {
-      builder(canvas, feature);
+      builder(
+        canvas,
+        feature,
+      );
     } else {
-      feature.geometry.drawOnCanvas(canvas, paint);
+      feature.geometry.drawOnCanvas(
+        canvas,
+        paint,
+        internalPaintOverridingEnabled,
+      );
     }
   }
 
@@ -59,6 +80,6 @@ class GeoJsonCustomPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    return oldDelegate != this;
   }
 }

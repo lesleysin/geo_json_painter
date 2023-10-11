@@ -8,12 +8,14 @@ class GeoJsonGeometryCollection extends GeoJsonGeometryObject {
   GeoJsonGeometryCollection({
     required super.type,
     required this.geometries,
+    required super.paintProperties,
   });
 
   @override
   void drawOnCanvas(
     Canvas canvas,
     Paint? paint,
+    bool internalPaintOverridingEnabled,
   ) {
     throw UnsupportedError("Collection could not be rendered");
   }

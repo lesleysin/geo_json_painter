@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geo_json_painter/geo_json/geometries/index.dart';
-import 'package:geo_json_painter/geo_json/models/index.dart';
 import 'package:geo_json_painter/geo_json_painter.dart';
 
 void main() {
@@ -17,10 +15,10 @@ class MyApp extends StatelessWidget {
       ..addPainterOverriding(
         GeoJsonFeatureType.LineString,
         Paint()
-          ..strokeWidth = 5
-          ..color = Colors.green,
+          ..strokeWidth = 3.0
+          ..color = Colors.red,
       )
-      //Override draw method example
+      // Override draw method example
       ..addDrawMethodOverriding(GeoJsonFeatureType.Point, (canvas, feature) {
         //Cast geometry object to concrete type for get access to feature coordinates object
         final point = feature.geometry as GeoJsonPoint;
@@ -45,7 +43,6 @@ class MyApp extends StatelessWidget {
               "type": "Point",
               "coordinates": [50.0, 50.0]
             },
-            "properties": {"prop0": "value0"}
           },
           {
             "type": "Feature",
@@ -129,7 +126,7 @@ class MyApp extends StatelessWidget {
                 ],
               ]
             },
-            "properties": {"prop0": "value0"}
+            "properties": {"strokeWidth": 15.0, "color": "#EFCC3F"}
           },
         ]
       });
@@ -142,7 +139,10 @@ class MyApp extends StatelessWidget {
               MediaQuery.of(context).size.width,
               MediaQuery.of(context).size.height,
             ),
-            painter: GeoJsonCustomPainter(geoJson: json),
+            painter: GeoJsonCustomPainter(
+              geoJson: json,
+              internalPaintOverridingEnabled: false, //true by default
+            ),
           ),
         ),
       ),
