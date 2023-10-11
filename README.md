@@ -102,3 +102,5 @@ final json = GeoJson()
     );
   }
 ```
+
+Info and documentation [HERE](doc/documentation.md)
