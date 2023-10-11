@@ -4,7 +4,7 @@ import 'package:geo_json_painter/geo_json/feature/index.dart';
 import 'package:geo_json_painter/geo_json/models/index.dart';
 
 class GeoJson {
-  GeoJsonFeatureCollection? _collection;
+  late GeoJsonFeatureCollection? _collection;
   final Map<GeoJsonFeatureType, DrawFunction> _builders = {};
   final Map<GeoJsonFeatureType, Paint> _painters = {};
 

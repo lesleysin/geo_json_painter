@@ -12,12 +12,17 @@ class GeoJsonFeature extends GeoJsonObject {
     super.id,
   });
 
+  static PaintProperties _parseProperties(Map<String, dynamic> properties) {
+    return PaintProperties.fromJson(properties);
+  }
+
   factory GeoJsonFeature.fromJson(Map<String, dynamic> json) {
     final featureType = geoJsonFeatureTypeFromString(json['type']);
     return GeoJsonFeature(
       type: featureType,
-      properties: json['properties'],
-      geometry: GeometryFabric.createFeature(json["geometry"]),
+      properties: json['properties'] ?? const {},
+      geometry: GeometryFabric.createFeature(
+          json["geometry"], _parseProperties(json['properties'] ?? const {})),
     );
   }
 }

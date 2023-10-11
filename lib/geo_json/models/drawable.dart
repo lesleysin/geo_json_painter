@@ -12,6 +12,7 @@ abstract class Drawable {
   void drawOnCanvas(
     Canvas canvas,
     Paint? paint,
+    bool internalPaintOverridingEnabled,
   );
 }
 

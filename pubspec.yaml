@@ -1,6 +1,6 @@
 name: geo_json_painter
 description: Library for parsing the GeoJson format based on the RFC 7946 specification and displaying GeoJson on canvas
-version: 0.1.1
+version: 0.2.0
 homepage: https://github.com/lesleysin/geo_json_painter
 
 platforms:
