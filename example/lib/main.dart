@@ -5,33 +5,42 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
     final json = GeoJson()
       //Only paint override example
       ..addPainterOverriding(
-        GeoJsonFeatureType.LineString,
+        GeoJsonFeatureType.MultiLineString,
         Paint()
           ..strokeWidth = 3.0
           ..color = Colors.red,
       )
       // Override draw method example
-      ..addDrawMethodOverriding(GeoJsonFeatureType.Point, (canvas, feature) {
+      ..addDrawMethodOverriding(GeoJsonFeatureType.Point,
+          (canvas, feature, paint) {
         //Cast geometry object to concrete type for get access to feature coordinates object
         final point = feature.geometry as GeoJsonPoint;
 
+        //if you want to apply custom shader to primitive you must compute rect for this here
+        final rect = Rect.fromCenter(
+            center: Offset(point.coordinates[1], point.coordinates[0]),
+            width: 25,
+            height: 25);
+
         //draw feature on canvas
         canvas.drawRect(
-            Rect.fromCenter(
-                center: Offset(point.coordinates[1], point.coordinates[0]),
-                width: 10,
-                height: 25),
-            Paint()
-              ..color = Colors.green
-              ..strokeWidth = 2);
+          rect,
+          Paint(),
+        );
       })
       //parse geojson file
       ..parseGeoJson({
@@ -84,8 +93,8 @@ class MyApp extends StatelessWidget {
             "geometry": {
               "type": "LineString",
               "coordinates": [
-                [10.0, 100.0],
-                [200.0, 150.0]
+                [500.0, 350.0],
+                [500.0, 0.0]
               ]
             },
             "properties": {"prop0": "value0"}
@@ -141,7 +150,24 @@ class MyApp extends StatelessWidget {
             ),
             painter: GeoJsonCustomPainter(
               geoJson: json,
-              internalPaintOverridingEnabled: false, //true by default
+              internalPaintOverridingEnabled: true, //true by default
+              beforeRender: (feature, rect) {
+                if (feature.type == GeoJsonFeatureType.LineString) {
+                  final line = feature as GeoJsonLineString;
+                  line.paintProperties.strokeWidth = 25.0;
+                  if (rect != null) {
+                    line.paintProperties.shader = const LinearGradient(colors: [
+                      Colors.red,
+                      Colors.orange,
+                      Colors.yellow,
+                      Colors.green,
+                      Colors.lightBlue,
+                      Colors.blue,
+                      Colors.purple,
+                    ]).createShader(rect);
+                  }
+                }
+              },
             ),
           ),
         ),
