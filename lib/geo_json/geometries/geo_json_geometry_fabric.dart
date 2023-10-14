@@ -10,7 +10,7 @@ class GeometryFabric {
     final featureType = geoJsonFeatureTypeFromString(json["type"]);
 
     switch (featureType) {
-      case GeoJsonFeatureType.Point:
+      case GeoJsonFeatureType.point:
         {
           return GeoJsonPoint(
             type: featureType,
@@ -18,7 +18,7 @@ class GeometryFabric {
             paintProperties: props,
           );
         }
-      case GeoJsonFeatureType.MultiPoint:
+      case GeoJsonFeatureType.multiPoint:
         {
           return GeoJsonMultiPoint(
             type: featureType,
@@ -26,7 +26,7 @@ class GeometryFabric {
             paintProperties: props,
           );
         }
-      case GeoJsonFeatureType.LineString:
+      case GeoJsonFeatureType.lineString:
         {
           return GeoJsonLineString(
             type: featureType,
@@ -34,7 +34,7 @@ class GeometryFabric {
             paintProperties: props,
           );
         }
-      case GeoJsonFeatureType.MultiLineString:
+      case GeoJsonFeatureType.multiLineString:
         {
           return GeoJsonMultiLineString(
             type: featureType,
@@ -42,7 +42,7 @@ class GeometryFabric {
             paintProperties: props,
           );
         }
-      case GeoJsonFeatureType.Polygon:
+      case GeoJsonFeatureType.polygon:
         {
           return GeoJsonPolygon(
             type: featureType,
@@ -50,7 +50,7 @@ class GeometryFabric {
             paintProperties: props,
           );
         }
-      case GeoJsonFeatureType.MultiPolygon:
+      case GeoJsonFeatureType.multiPolygon:
         {
           return GeoJsonMultiPolygon(
             type: featureType,

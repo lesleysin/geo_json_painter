@@ -18,13 +18,13 @@ class _MyAppState extends State<MyApp> {
     final json = GeoJson()
       //Only paint override example
       ..addPainterOverriding(
-        GeoJsonFeatureType.MultiLineString,
+        GeoJsonFeatureType.multiLineString,
         Paint()
           ..strokeWidth = 3.0
           ..color = Colors.red,
       )
       // Override draw method example
-      ..addDrawMethodOverriding(GeoJsonFeatureType.Point,
+      ..addDrawMethodOverriding(GeoJsonFeatureType.point,
           (canvas, feature, paint) {
         //Cast geometry object to concrete type for get access to feature coordinates object
         final point = feature.geometry as GeoJsonPoint;
@@ -163,7 +163,7 @@ class _MyAppState extends State<MyApp> {
               geoJson: json,
               internalPaintOverridingEnabled: true, //true by default
               beforeRender: (feature, rect) {
-                if (feature.type == GeoJsonFeatureType.LineString) {
+                if (feature.type == GeoJsonFeatureType.lineString) {
                   final line = feature as GeoJsonLineString;
                   line.paintProperties.strokeWidth = 25.0;
                   if (rect != null) {

@@ -72,7 +72,7 @@ class GeoJsonCustomPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     if (geoJson.collection != null) {
       for (var feature in geoJson.collection!.features) {
-        if (feature.geometry.type == GeoJsonFeatureType.GeometryCollection) {
+        if (feature.geometry.type == GeoJsonFeatureType.geometryCollection) {
           _drawCollection(
             feature.geometry as GeoJsonGeometryCollection,
             canvas,

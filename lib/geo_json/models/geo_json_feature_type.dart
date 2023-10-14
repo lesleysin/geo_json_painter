@@ -3,55 +3,55 @@
 enum GeoJsonFeatureType {
   ///Unknown type
   ///Throws an exception when json parse
-  Unknown,
+  unknown,
 
   //Geometry features
 
   ///Point feature related with [GeoJsonPoint] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.2
-  Point,
+  point,
 
   ///MultiPoint feature related with [GeoJsonMultiPoint] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.3
-  MultiPoint,
+  multiPoint,
 
   ///LineString feature related with [GeoJsonLineStrings] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.4
-  LineString,
+  lineString,
 
   ///MultiLineString feature related with [GeoJsonMultiLineString] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.5
-  MultiLineString,
+  multiLineString,
 
   ///Polygon feature related with [GeoJsonPolygon] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.6
-  Polygon,
+  polygon,
 
   ///MultiPolygon feature related with [GeoJsonMultiPolygon] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.7
-  MultiPolygon,
+  multiPolygon,
 
   ///GeometryCollection feature related with [GeoJsonGeometryCollection] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.8
-  GeometryCollection,
+  geometryCollection,
   //Top-level features
 
   ///Feature feature related with [GeoJsonFeature] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.2
-  Feature,
+  feature,
 
   ///FeatureCollection feature related with [GeoJsonFeatureCollection] implementation
   ///
   ///Doc: https://datatracker.ietf.org/doc/html/rfc7946#section-3.3
-  FeatureCollection,
+  featureCollection,
 }
 
 ///Inferring feature type based on string
@@ -63,41 +63,41 @@ GeoJsonFeatureType geoJsonFeatureTypeFromString(String? str) {
   switch (str) {
     case "Point":
       {
-        return GeoJsonFeatureType.Point;
+        return GeoJsonFeatureType.point;
       }
     case "MultiPoint":
       {
-        return GeoJsonFeatureType.MultiPoint;
+        return GeoJsonFeatureType.multiPoint;
       }
     case "LineString":
       {
-        return GeoJsonFeatureType.LineString;
+        return GeoJsonFeatureType.lineString;
       }
     case "MultiLineString":
       {
-        return GeoJsonFeatureType.MultiLineString;
+        return GeoJsonFeatureType.multiLineString;
       }
     case "Polygon":
       {
-        return GeoJsonFeatureType.Polygon;
+        return GeoJsonFeatureType.polygon;
       }
     case "MultiPolygon":
       {
-        return GeoJsonFeatureType.MultiPolygon;
+        return GeoJsonFeatureType.multiPolygon;
       }
     case "GeometryCollection":
       {
-        return GeoJsonFeatureType.GeometryCollection;
+        return GeoJsonFeatureType.geometryCollection;
       }
     case "FeatureCollection":
       {
-        return GeoJsonFeatureType.FeatureCollection;
+        return GeoJsonFeatureType.featureCollection;
       }
     case "Feature":
       {
-        return GeoJsonFeatureType.Feature;
+        return GeoJsonFeatureType.feature;
       }
     default:
-      return GeoJsonFeatureType.Unknown;
+      return GeoJsonFeatureType.unknown;
   }
 }
