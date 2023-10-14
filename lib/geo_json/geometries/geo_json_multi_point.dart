@@ -16,6 +16,7 @@ class GeoJsonMultiPoint extends GeoJsonGeometryObject {
     Canvas canvas,
     Paint? paint,
     bool internalPaintOverridingEnabled,
+    BeforeRenderHookCallback? callback,
   ) {
     final List<Offset> points = [];
     for (var pair in coordinates) {
@@ -28,5 +29,10 @@ class GeoJsonMultiPoint extends GeoJsonGeometryObject {
       points,
       mergePaints(paint, internalPaintOverridingEnabled),
     );
+  }
+
+  @override
+  Rect computeFeatureRect() {
+    throw UnsupportedError("Rect computation for Point feature unavailable");
   }
 }

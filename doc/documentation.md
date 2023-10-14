@@ -37,8 +37,7 @@ The library provides several ways to change the default appearance of primitives
 
 ```dart
 //Paint class overriding
-void addPainterOverriding
-(GeoJsonFeatureType type, Paint paint)
+void addPainterOverriding(GeoJsonFeatureType type, Paint paint);
 ```
 
 - Overriding the entire drawing method. You independently implement methods for processing
@@ -58,3 +57,22 @@ The following is a list in descending order of priority:
    with passed properties.
 3. Properties. Passed properties apply only to the object to which they were attached. Have the
    lowest priority.
+
+## Render hooks
+
+GeoJsonCustomPainter has two hook callbacks who will be called on pre-render stage and after feature
+rendering.
+
+```dart
+typedef BeforeRenderHookCallback = void Function(GeoJsonGeometryObject, Rect?);
+typedef AfterRenderHookCallback = void Function(GeoJsonGeometryObject);
+```
+
+BeforeRenderHookCallback will be called after Paint instances merging anf before canvas drawing
+method call.
+AfterRenderHookCallback will be called after canvas drawing method call.
+
+In addition to a reference to a GeoJsonGeometryObject, does the BeforeRenderHookCallback contain a
+reference to an object of type Rect?.
+Thanks to this, you can assign custom shaders (gradients or shaders compiled from FragmentProgramm)
+to the shader property of the PaintProperties object (see example app);

@@ -2,10 +2,11 @@ import 'dart:ui';
 
 import 'package:geo_json_painter/geo_json/models/index.dart';
 
-class GeoJsonLineStrings extends GeoJsonGeometryObject {
+class GeoJsonLineString extends GeoJsonGeometryObject {
   final GeoJsonCoordinatePairList coordinates;
+  final Path _path = Path();
 
-  GeoJsonLineStrings({
+  GeoJsonLineString({
     required super.type,
     required this.coordinates,
     required super.paintProperties,
@@ -16,17 +17,31 @@ class GeoJsonLineStrings extends GeoJsonGeometryObject {
     Canvas canvas,
     Paint? paint,
     bool internalPaintOverridingEnabled,
+    BeforeRenderHookCallback? callback,
   ) {
-    final List<Offset> points = [];
-    for (var pair in coordinates) {
-      points.add(
-        Offset(pair[1], pair[0]),
-      );
+    final rect = computeFeatureRect();
+
+    callback?.call(this, rect);
+
+    final resultingPaint = mergePaints(paint, internalPaintOverridingEnabled);
+
+    canvas.drawPath(_path, resultingPaint);
+  }
+
+  @override
+  Rect computeFeatureRect() {
+    for (var i = 0; i < coordinates.length; i++) {
+      final pair = coordinates[i];
+
+      if (i == 0) {
+        _path.moveTo(pair[1], pair[0]);
+      } else {
+        _path.lineTo(pair[1], pair[0]);
+      }
     }
-    canvas.drawPoints(
-      PointMode.polygon,
-      points,
-      mergePaints(paint, internalPaintOverridingEnabled),
-    );
+
+    final rect = _path.getBounds();
+
+    return rect;
   }
 }

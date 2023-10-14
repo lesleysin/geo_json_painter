@@ -5,3 +5,4 @@ export 'geo_json_feature_type.dart';
 export 'geo_json_geometry_object.dart';
 export 'geo_json_object.dart';
 export 'paint_props.dart';
+export 'callbacks.dart';
