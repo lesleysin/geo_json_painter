@@ -6,6 +6,7 @@ typedef MultiPolygonCoordinates = List<List<GeoJsonCoordinatePairList>>;
 
 class GeoJsonMultiPolygon extends GeoJsonGeometryObject {
   final MultiPolygonCoordinates coordinates;
+  final Path _path = Path();
 
   GeoJsonMultiPolygon({
     required super.type,
@@ -20,26 +21,33 @@ class GeoJsonMultiPolygon extends GeoJsonGeometryObject {
     bool internalPaintOverridingEnabled,
     BeforeRenderHookCallback? callback,
   ) {
-    for (var polygonGroup in coordinates) {
-      for (var polygon in polygonGroup) {
-        final List<Offset> points = [];
-        for (var pair in polygon) {
-          points.add(
-            Offset(pair[1], pair[0]),
-          );
-        }
-        canvas.drawPoints(
-          PointMode.polygon,
-          points,
-          mergePaints(paint, internalPaintOverridingEnabled),
-        );
-      }
-    }
+    final rect = computeFeatureRect();
+
+    callback?.call(this, rect);
+
+    final resultingPaint = mergePaints(paint, internalPaintOverridingEnabled);
+
+    canvas.drawPath(_path, resultingPaint);
   }
 
   @override
   Rect computeFeatureRect() {
-    // TODO: implement computeRectSelf
-    throw UnimplementedError();
+    for (var polygon in coordinates) {
+      for (var line in polygon) {
+        for (var i = 0; i < line.length; i++) {
+          final pair = line[i];
+
+          if (i == 0) {
+            _path.moveTo(pair[1], pair[0]);
+          } else {
+            _path.lineTo(pair[1], pair[0]);
+          }
+        }
+      }
+    }
+
+    final rect = _path.getBounds();
+
+    return rect;
   }
 }

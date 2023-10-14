@@ -19,17 +19,7 @@ class GeoJsonLineString extends GeoJsonGeometryObject {
     bool internalPaintOverridingEnabled,
     BeforeRenderHookCallback? callback,
   ) {
-    for (var i = 0; i < coordinates.length; i++) {
-      final pair = coordinates[i];
-
-      if (i == 0) {
-        _path.moveTo(pair[1], pair[0]);
-      } else {
-        _path.lineTo(pair[1], pair[0]);
-      }
-    }
-
-    final rect = _path.getBounds();
+    final rect = computeFeatureRect();
 
     callback?.call(this, rect);
 

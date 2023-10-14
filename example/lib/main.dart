@@ -13,7 +13,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     final json = GeoJson()
@@ -49,9 +48,14 @@ class _MyAppState extends State<MyApp> {
           {
             "type": "Feature",
             "geometry": {
-              "type": "Point",
-              "coordinates": [50.0, 50.0]
+              "type": "MultiPoint",
+              "coordinates": [
+                [10.0, 10.0],
+                [20.0, 20.0],
+                [30.0, 30.0]
+              ]
             },
+            "properties": {"strokeWidth": 10.0, "color": "#EFCC3F"}
           },
           {
             "type": "Feature",
@@ -105,11 +109,18 @@ class _MyAppState extends State<MyApp> {
               "type": "Polygon",
               "coordinates": [
                 [
+                  [10.0, 10.0],
                   [100.0, 10.0],
-                  [150.0, 10.0],
-                  [150.0, 60.0],
-                  [100.0, 60.0],
-                  [100.0, 10.0]
+                  [100.0, 100.0],
+                  [10.0, 100.0],
+                  [10.0, 10.0]
+                ],
+                [
+                  [10.0, 10.0],
+                  [100.0, 10.0],
+                  [100.0, 100.0],
+                  [10.0, 100.0],
+                  [10.0, 10.0]
                 ]
               ]
             },

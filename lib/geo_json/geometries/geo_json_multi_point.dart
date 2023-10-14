@@ -33,7 +33,6 @@ class GeoJsonMultiPoint extends GeoJsonGeometryObject {
 
   @override
   Rect computeFeatureRect() {
-    // TODO: implement computeRectSelf
-    throw UnimplementedError();
+    throw UnsupportedError("Rect computation for Point feature unavailable");
   }
 }
