@@ -9,7 +9,10 @@ import 'paint_props.dart';
 abstract class GeoJsonGeometryObject extends GeoJsonObject implements Drawable {
   final PaintProperties paintProperties;
 
-  GeoJsonGeometryObject({required super.type, required this.paintProperties});
+  GeoJsonGeometryObject({
+    required super.type,
+    required this.paintProperties,
+  });
 
   Paint mergePaints(
     Paint? paint,
@@ -27,12 +30,13 @@ abstract class GeoJsonGeometryObject extends GeoJsonObject implements Drawable {
       resultPaint.blendMode =
           paintProperties.blendMode ?? resultPaint.blendMode;
       resultPaint.color = paintProperties.color ?? resultPaint.color;
-      resultPaint.strokeWidth =
-          paintProperties.strokeWidth ?? resultPaint.strokeWidth;
+      resultPaint.strokeWidth = paintProperties.strokeWidth ?? 1.0;
       resultPaint.isAntiAlias =
           paintProperties.isAntiAlias ?? resultPaint.isAntiAlias;
       resultPaint.invertColors =
           paintProperties.invertColors ?? resultPaint.invertColors;
+      resultPaint.shader = paintProperties.shader ?? resultPaint.shader;
+      resultPaint.style = PaintingStyle.stroke;
     }
 
     return resultPaint;

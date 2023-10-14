@@ -28,7 +28,7 @@ class GeometryFabric {
         }
       case GeoJsonFeatureType.LineString:
         {
-          return GeoJsonLineStrings(
+          return GeoJsonLineString(
             type: featureType,
             coordinates: List.from(json["coordinates"]),
             paintProperties: props,

@@ -16,7 +16,13 @@ class GeoJsonGeometryCollection extends GeoJsonGeometryObject {
     Canvas canvas,
     Paint? paint,
     bool internalPaintOverridingEnabled,
+    BeforeRenderHookCallback? callback,
   ) {
+    throw UnsupportedError("Collection could not be rendered");
+  }
+
+  @override
+  Rect computeFeatureRect() {
     throw UnsupportedError("Collection could not be rendered");
   }
 }
