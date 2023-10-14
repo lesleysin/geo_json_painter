@@ -1,3 +1,9 @@
+## 0.3.0
+
+- Added shader property for PaintProperties object (via render callbacks)
+- Added beforeRender and afterRender callback to GeoJsonCustomPainter
+- 
+
 ## 0.2.0
 
 - GeoJson feature properties object parsing
