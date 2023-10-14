@@ -16,6 +16,7 @@ class GeoJsonMultiLineString extends GeoJsonGeometryObject {
     Canvas canvas,
     Paint? paint,
     bool internalPaintOverridingEnabled,
+    BeforeRenderHookCallback? callback,
   ) {
     for (var line in coordinates) {
       final List<Offset> points = [];
@@ -30,5 +31,11 @@ class GeoJsonMultiLineString extends GeoJsonGeometryObject {
         mergePaints(paint, internalPaintOverridingEnabled),
       );
     }
+  }
+
+  @override
+  Rect computeFeatureRect() {
+    // TODO: implement computeRectSelf
+    throw UnimplementedError();
   }
 }

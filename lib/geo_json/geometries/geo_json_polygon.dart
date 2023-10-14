@@ -16,6 +16,7 @@ class GeoJsonPolygon extends GeoJsonGeometryObject {
     Canvas canvas,
     Paint? paint,
     bool internalPaintOverridingEnabled,
+    BeforeRenderHookCallback? callback,
   ) {
     for (var polygon in coordinates) {
       final List<Offset> points = [];
@@ -30,5 +31,11 @@ class GeoJsonPolygon extends GeoJsonGeometryObject {
         mergePaints(paint, internalPaintOverridingEnabled),
       );
     }
+  }
+
+  @override
+  Rect computeFeatureRect() {
+    // TODO: implement computeRectSelf
+    throw UnimplementedError();
   }
 }

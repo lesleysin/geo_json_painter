@@ -16,13 +16,37 @@ class GeoJsonPoint extends GeoJsonGeometryObject {
     Canvas canvas,
     Paint? paint,
     bool internalPaintOverridingEnabled,
+    BeforeRenderHookCallback? callback,
   ) {
-    canvas.drawPoints(
-      PointMode.points,
-      [
-        Offset(coordinates[1], coordinates[0]),
-      ],
-      mergePaints(paint, internalPaintOverridingEnabled),
+    final rect = Rect.fromCenter(
+      center: Offset(
+        coordinates[1],
+        coordinates[0],
+      ),
+      width: paint?.strokeWidth ?? 1.0,
+      height: paint?.strokeWidth ?? 1.0,
     );
+
+    callback?.call(this, rect);
+
+    final mergedPaint = mergePaints(paint, internalPaintOverridingEnabled);
+    canvas.drawRect(
+      rect,
+      mergedPaint,
+    );
+  }
+
+  @override
+  Rect computeFeatureRect() {
+    final rect = Rect.fromCenter(
+      center: Offset(
+        coordinates[1],
+        coordinates[0],
+      ),
+      width: 1.0,
+      height: 1.0,
+    );
+
+    return rect;
   }
 }

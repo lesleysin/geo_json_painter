@@ -4,11 +4,17 @@ import 'package:flutter/material.dart';
 ///which can be passed to the "properties" field
 ///of the [GeoJsonFeature] and used to draw a specific feature
 class PaintProperties {
-  final Color? color;
-  final double? strokeWidth;
-  final BlendMode? blendMode;
-  final bool? isAntiAlias;
-  final bool? invertColors;
+  Color? color;
+  double? strokeWidth;
+  BlendMode? blendMode;
+  bool? isAntiAlias;
+  bool? invertColors;
+
+  ///Property for assigning a custom shader for use when drawing a primitive
+  ///
+  ///Can be assigned ONLY at runtime using the **beforeRender** callback
+  Shader? shader;
+
 
   PaintProperties({
     required this.strokeWidth,
@@ -16,6 +22,7 @@ class PaintProperties {
     required this.blendMode,
     required this.isAntiAlias,
     required this.invertColors,
+    this.shader,
   });
 
   ///The method is designed to interpret

@@ -18,6 +18,7 @@ class GeoJsonMultiPolygon extends GeoJsonGeometryObject {
     Canvas canvas,
     Paint? paint,
     bool internalPaintOverridingEnabled,
+    BeforeRenderHookCallback? callback,
   ) {
     for (var polygonGroup in coordinates) {
       for (var polygon in polygonGroup) {
@@ -34,5 +35,11 @@ class GeoJsonMultiPolygon extends GeoJsonGeometryObject {
         );
       }
     }
+  }
+
+  @override
+  Rect computeFeatureRect() {
+    // TODO: implement computeRectSelf
+    throw UnimplementedError();
   }
 }

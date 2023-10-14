@@ -7,6 +7,8 @@ import 'index.dart';
 
 class GeoJsonCustomPainter extends CustomPainter {
   final GeoJson geoJson;
+  final BeforeRenderHookCallback? beforeRender;
+  final AfterRenderHookCallback? afterRender;
 
   ///Determines whether properties passed in the properties
   ///object will be used during rendering and whether
@@ -20,6 +22,8 @@ class GeoJsonCustomPainter extends CustomPainter {
   GeoJsonCustomPainter({
     required this.geoJson,
     this.internalPaintOverridingEnabled = true,
+    this.beforeRender,
+    this.afterRender,
   });
 
   void _drawCollectionGeometry(GeoJsonGeometryObject geometry, Canvas canvas) {
@@ -27,6 +31,7 @@ class GeoJsonCustomPainter extends CustomPainter {
       canvas,
       geoJson.painters[geometry.type],
       internalPaintOverridingEnabled,
+      null,
     );
   }
 
@@ -40,13 +45,17 @@ class GeoJsonCustomPainter extends CustomPainter {
       builder(
         canvas,
         feature,
+        paint,
       );
+      afterRender?.call(feature.geometry);
     } else {
       feature.geometry.drawOnCanvas(
         canvas,
         paint,
         internalPaintOverridingEnabled,
+        beforeRender,
       );
+      afterRender?.call(feature.geometry);
     }
   }
 
